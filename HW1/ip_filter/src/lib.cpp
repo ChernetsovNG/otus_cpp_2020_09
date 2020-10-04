@@ -1,4 +1,4 @@
-#include "lib.h"
+#include "include/lib.h"
 
 #include <string>
 #include <vector>
@@ -33,7 +33,7 @@ bool is_number(const std::string &s) {
     return !s.empty() && it == s.end();
 }
 
-bool check_is_ip(const std::string &str) {
+bool is_valid_ip_address(const std::string &str) {
     auto res = split(str, '.');
     if (res.size() != 4) {
         return false;

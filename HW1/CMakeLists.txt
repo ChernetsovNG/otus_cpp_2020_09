@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
-#project(helloworld VERSION 0.0.10)
+#project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(helloworld VERSION 0.0.10)
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
-configure_file(version/version.h.in version.h)
+configure_file(version/src/version.h.in version.h)
 
 # version
-add_executable(helloworld_cli version/main.cpp)
-add_library(helloworld version/lib.cpp)
+add_executable(helloworld_cli version/src/main.cpp)
+add_library(helloworld version/src/lib.cpp)
 add_executable(test_version version/test/test_version.cpp)
 
 set_target_properties(helloworld_cli helloworld test_version PROPERTIES
@@ -33,8 +33,8 @@ target_link_libraries(test_version
         )
 
 # ip_filter
-add_executable(ip_filter ip_filter/main.cpp)
-add_library(ip_filter_lib ip_filter/lib.cpp)
+add_executable(ip_filter ip_filter/src/main.cpp)
+add_library(ip_filter_lib ip_filter/src/lib.cpp)
 add_executable(test_split ip_filter/test/test_split.cpp)
 add_executable(test_check_ip ip_filter/test/test_check_ip.cpp)
 add_executable(test_sort ip_filter/test/test_sort.cpp)

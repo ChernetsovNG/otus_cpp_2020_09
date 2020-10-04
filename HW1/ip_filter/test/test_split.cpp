@@ -1,6 +1,6 @@
 #define BOOST_TEST_MODULE test_split
 
-#include "../lib.h"
+#include "../src/include/lib.h"
 
 #include <string>
 #include <vector>

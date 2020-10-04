@@ -1,4 +1,4 @@
-#include "lib.h"
+#include "include/lib.h"
 
 #include <iostream>
 #include <algorithm>
@@ -12,7 +12,7 @@ int main() {
         for (std::string line; std::getline(std::cin, line);) {
             std::vector<std::string> v = split(line, '\t');
             auto elem = v.at(0);
-            if (check_is_ip(elem)) {
+            if (is_valid_ip_address(elem)) {
                 ip_pool.push_back(split(v.at(0), '.'));
             }
         }
