@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.10)
 
 project(ip_filter)
 
-find_package(Boost COMPONENTS unit_test_framework REQUIRED)
-
 add_executable(ip_filter src/main.cpp)
 add_library(ip_filter_lib src/lib.cpp)
 add_executable(test_split test/test_split.cpp)
