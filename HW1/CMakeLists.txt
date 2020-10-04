@@ -10,7 +10,7 @@ configure_file(version/version.h.in version.h)
 # version
 add_executable(helloworld_cli version/main.cpp)
 add_library(helloworld version/lib.cpp)
-add_executable(test_version version/test_version.cpp)
+add_executable(test_version version/test/test_version.cpp)
 
 set_target_properties(helloworld_cli helloworld test_version PROPERTIES
         CXX_STANDARD 17
@@ -35,7 +35,8 @@ target_link_libraries(test_version
 # ip_filter
 add_executable(ip_filter_cli ip_filter/main.cpp)
 add_library(ip_filter ip_filter/ip_filter.cpp)
-add_executable(test_split ip_filter/test_split.cpp)
+add_executable(test_split ip_filter/test/test_split.cpp)
+add_executable(test_check_ip ip_filter/test/test_check_ip.cpp)
 
 set_target_properties(ip_filter_cli ip_filter test_split PROPERTIES
         CXX_STANDARD 17
@@ -44,7 +45,7 @@ set_target_properties(ip_filter_cli ip_filter test_split PROPERTIES
 target_include_directories(ip_filter
         PRIVATE "${CMAKE_BINARY_DIR}"
         )
-set_target_properties(test_split PROPERTIES
+set_target_properties(test_split test_check_ip PROPERTIES
         COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
         INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
         )
@@ -53,6 +54,10 @@ target_link_libraries(ip_filter_cli PRIVATE
         ip_filter
         )
 target_link_libraries(test_split
+        ${Boost_LIBRARIES}
+        ip_filter
+        )
+target_link_libraries(test_check_ip
         ${Boost_LIBRARIES}
         ip_filter
         )
@@ -67,6 +72,12 @@ if (MSVC)
     target_compile_options(test_version PRIVATE
             /W4
             )
+    target_compile_options(test_split PRIVATE
+            /W4
+            )
+    target_compile_options(test_check_ip PRIVATE
+            /W4
+            )
 else ()
     target_compile_options(helloworld_cli PRIVATE
             -Wall -Wextra -pedantic -Werror
@@ -75,6 +86,12 @@ else ()
             -Wall -Wextra -pedantic -Werror
             )
     target_compile_options(test_version PRIVATE
+            -Wall -Wextra -pedantic -Werror
+            )
+    target_compile_options(test_split PRIVATE
+            -Wall -Wextra -pedantic -Werror
+            )
+    target_compile_options(test_check_ip PRIVATE
             -Wall -Wextra -pedantic -Werror
             )
 endif ()
@@ -96,3 +113,4 @@ enable_testing()
 
 add_test(test_version test_version)
 add_test(test_split test_split)
+add_test(test_check_ip test_check_ip)

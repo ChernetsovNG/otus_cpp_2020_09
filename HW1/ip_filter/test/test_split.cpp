@@ -1,6 +1,6 @@
-#define BOOST_TEST_MODULE test_ip_filter
+#define BOOST_TEST_MODULE test_split
 
-#include "ip_filter.h"
+#include "../ip_filter.h"
 
 #include <string>
 #include <vector>

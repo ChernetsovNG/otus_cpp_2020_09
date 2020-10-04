@@ -25,3 +25,7 @@ std::vector<std::string> split(const std::string &str, char d) {
 
     return r;
 }
+
+bool check_ip(const std::string &ip) {
+    return true;
+}
