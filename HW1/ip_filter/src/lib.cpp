@@ -4,14 +4,16 @@
 #include <vector>
 #include <algorithm>
 
+bool is_number(const std::string &s);
+
 // ("",  '.') -> [""]
 // ("11", '.') -> ["11"]
 // ("..", '.') -> ["", "", ""]
 // ("11.", '.') -> ["11", ""]
 // (".11", '.') -> ["", "11"]
 // ("11.22", '.') -> ["11", "22"]
-std::vector<std::string> split(const std::string &str, char d) {
-    std::vector<std::string> r;
+std::vector <std::string> split(const std::string &str, char d) {
+    std::vector <std::string> r;
 
     std::string::size_type start = 0;
     std::string::size_type stop = str.find_first_of(d);
@@ -25,12 +27,6 @@ std::vector<std::string> split(const std::string &str, char d) {
     r.push_back(str.substr(start));
 
     return r;
-}
-
-bool is_number(const std::string &s) {
-    std::string::const_iterator it = s.begin();
-    while (it != s.end() && std::isdigit(*it)) ++it;
-    return !s.empty() && it == s.end();
 }
 
 bool is_valid_ip_address(const std::string &str) {
@@ -65,4 +61,10 @@ void sort_in_reverse_lexicographic_order(std::vector<std::vector<std::string>> &
                   }
                   return false;
               });
+}
+
+bool is_number(const std::string &s) {
+    std::string::const_iterator it = s.begin();
+    while (it != s.end() && std::isdigit(*it)) ++it;
+    return !s.empty() && it == s.end();
 }
