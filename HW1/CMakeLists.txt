@@ -1,56 +1,83 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+#project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(helloworld VERSION 0.0.10)
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
-configure_file(version.h.in version.h)
+configure_file(version/version.h.in version.h)
 
-add_executable(helloworld_cli main.cpp)
-add_library(helloworld lib.cpp)
-add_executable(test_version test/test_version.cpp)
+# version
+add_executable(helloworld_cli version/main.cpp)
+add_library(helloworld version/lib.cpp)
+add_executable(test_version version/test_version.cpp)
 
 set_target_properties(helloworld_cli helloworld test_version PROPERTIES
         CXX_STANDARD 17
         CXX_STANDARD_REQUIRED ON
         )
 target_include_directories(helloworld
-    PRIVATE "${CMAKE_BINARY_DIR}"
-)
+        PRIVATE "${CMAKE_BINARY_DIR}"
+        )
 set_target_properties(test_version PROPERTIES
-    COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
-    INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
-)
+        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
+        INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
+        )
 
 target_link_libraries(helloworld_cli PRIVATE
-    helloworld
-)
+        helloworld
+        )
 target_link_libraries(test_version
-    ${Boost_LIBRARIES}
-    helloworld
-)
+        ${Boost_LIBRARIES}
+        helloworld
+        )
+
+# ip_filter
+add_executable(ip_filter_cli ip_filter/main.cpp)
+add_library(ip_filter ip_filter/ip_filter.cpp)
+add_executable(test_split ip_filter/test_split.cpp)
+
+set_target_properties(ip_filter_cli ip_filter test_split PROPERTIES
+        CXX_STANDARD 17
+        CXX_STANDARD_REQUIRED ON
+        )
+target_include_directories(ip_filter
+        PRIVATE "${CMAKE_BINARY_DIR}"
+        )
+set_target_properties(test_split PROPERTIES
+        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
+        INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
+        )
+
+target_link_libraries(ip_filter_cli PRIVATE
+        ip_filter
+        )
+target_link_libraries(test_split
+        ${Boost_LIBRARIES}
+        ip_filter
+        )
 
 if (MSVC)
     target_compile_options(helloworld_cli PRIVATE
-        /W4
-    )
+            /W4
+            )
     target_compile_options(helloworld PRIVATE
-        /W4
-    )
+            /W4
+            )
     target_compile_options(test_version PRIVATE
-        /W4
-    )
+            /W4
+            )
 else ()
     target_compile_options(helloworld_cli PRIVATE
-        -Wall -Wextra -pedantic -Werror
-    )
+            -Wall -Wextra -pedantic -Werror
+            )
     target_compile_options(helloworld PRIVATE
-        -Wall -Wextra -pedantic -Werror
-    )
+            -Wall -Wextra -pedantic -Werror
+            )
     target_compile_options(test_version PRIVATE
-        -Wall -Wextra -pedantic -Werror
-    )
-endif()
+            -Wall -Wextra -pedantic -Werror
+            )
+endif ()
 
 
 install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
@@ -68,3 +95,4 @@ include(CPack)
 enable_testing()
 
 add_test(test_version test_version)
+add_test(test_split test_split)
