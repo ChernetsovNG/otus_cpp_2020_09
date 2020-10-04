@@ -9,3 +9,5 @@ add_subdirectory(version)
 add_subdirectory(ip_filter)
 
 configure_file(version/src/include/version.h.in version.h)
+
+enable_testing()
