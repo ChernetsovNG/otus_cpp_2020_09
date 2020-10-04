@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.10)
 
 project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
@@ -11,9 +11,9 @@ add_library(helloworld lib.cpp)
 add_executable(test_version test/test_version.cpp)
 
 set_target_properties(helloworld_cli helloworld test_version PROPERTIES
-    CXX_STANDARD 14
-    CXX_STANDARD_REQUIRED ON
-)
+        CXX_STANDARD 17
+        CXX_STANDARD_REQUIRED ON
+        )
 target_include_directories(helloworld
     PRIVATE "${CMAKE_BINARY_DIR}"
 )

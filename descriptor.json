@@ -1,0 +1,6 @@
+{
+  "files": [
+    "helloworld-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb"
+  ],
+  "publish": true
+}
