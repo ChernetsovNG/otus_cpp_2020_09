@@ -3,7 +3,7 @@
 #include <iostream>
 #include <algorithm>
 
-void print_ips(const std::vector <std::vector<std::string>> &ip_pool);
+std::vector <std::vector<std::string>> read_ips();
 
 void print_ips_start_from_1(std::vector <std::vector<std::string>> &ip_pool);
 
@@ -11,17 +11,12 @@ void print_ips_start_from_46_and_70(std::vector <std::vector<std::string>> &ip_p
 
 void print_ips_any_byte_46(std::vector <std::vector<std::string>> &ip_pool);
 
+void print_ips(const std::vector <std::vector<std::string>> &ip_pool);
+
 int main() {
     try {
-        std::vector <std::vector<std::string>> ip_pool;
-
-        for (std::string line; std::getline(std::cin, line);) {
-            std::vector <std::string> v = split(line, '\t');
-            auto elem = v.at(0);
-            if (is_valid_ip_address(elem)) {
-                ip_pool.push_back(split(v.at(0), '.'));
-            }
-        }
+        // читаем список ip-адресов из потока ввода
+        std::vector <std::vector<std::string>> ip_pool = read_ips();
 
         // сортируем адреса в обратном лексикографическом порядке
         sort_in_reverse_lexicographic_order(ip_pool);
@@ -43,6 +38,18 @@ int main() {
     }
 
     return 0;
+}
+
+std::vector <std::vector<std::string>> read_ips() {
+    std::vector <std::vector<std::string>> ip_pool;
+    for (std::string line; std::getline(std::cin, line);) {
+        std::vector <std::string> v = split(line, '\t');
+        auto elem = v.at(0);
+        if (is_valid_ip_address(elem)) {
+            ip_pool.push_back(split(v.at(0), '.'));
+        }
+    }
+    return ip_pool;
 }
 
 void print_ips_start_from_1(std::vector <std::vector<std::string>> &ip_pool) {
