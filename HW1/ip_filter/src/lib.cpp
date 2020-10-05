@@ -6,12 +6,14 @@
 
 bool is_number(const std::string &s);
 
-// ("",  '.') -> [""]
-// ("11", '.') -> ["11"]
-// ("..", '.') -> ["", "", ""]
-// ("11.", '.') -> ["11", ""]
-// (".11", '.') -> ["", "11"]
-// ("11.22", '.') -> ["11", "22"]
+std::vector<int> convert_to_ip(std::vector <std::string> ip_string) {
+    std::vector<int> ip;
+    for (int i = 0; i < 4; ++i) {
+        ip.push_back(std::stoi(ip_string[i]));
+    }
+    return ip;
+}
+
 std::vector <std::string> split(const std::string &str, char d) {
     std::vector <std::string> r;
 
@@ -47,16 +49,14 @@ bool is_valid_ip_address(const std::string &str) {
     return true;
 }
 
-void sort_in_reverse_lexicographic_order(std::vector<std::vector<std::string>> &ip_pool) {
+void sort_in_reverse_lexicographic_order(std::vector <std::vector<int>> &ip_pool) {
     std::sort(ip_pool.begin(), ip_pool.end(),
-              [](const std::vector<std::string> &ip1, const std::vector<std::string> &ip2) {
+              [](const std::vector<int> &ip1, const std::vector<int> &ip2) {
                   for (int i = 0; i < 4; ++i) {
-                      int ip1_elem = std::stoi(ip1[i]);
-                      int ip2_elem = std::stoi(ip2[i]);
-                      if (ip1_elem == ip2_elem) {
+                      if (ip1[i] == ip2[i]) {
                           continue;
                       } else {
-                          return ip1_elem > ip2_elem;
+                          return ip1[i] > ip2[i];
                       }
                   }
                   return false;
