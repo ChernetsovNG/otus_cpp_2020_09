@@ -1,5 +1,7 @@
 #include <iostream>
 
+#define UNUSED(variable) (void)variable
+
 void question_1();
 
 template<typename T>
@@ -26,8 +28,24 @@ void func4(T &&param) {
     std::cout << param << std::endl;
 }
 
+auto someFunction1(int a, float b) {
+    return a + b;
+}
+
+template<typename T>
+void tfunc(T) {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+}
+
 int main(int argc, char *argv[]) {
-    question_1();
+    int i = 42;
+
+    int *ptr = nullptr;
+    decltype((i)) ddefer = i;
+
+    ddefer = 53;
+
+    std::cout << i << std::endl;
 }
 
 void question_1() {
