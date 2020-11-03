@@ -10,6 +10,11 @@ struct Allocator {
 
     ~Allocator() = default;
 
+    template<typename U>
+    explicit Allocator(const Allocator<U> &) {
+        std::cout << "Copy constructor" << std::endl;
+    }
+
     T *allocate(std::size_t n) {
         std::cout << "allocate: [n = " << n << "]" << std::endl;
         auto p = std::malloc(n * sizeof(T));
