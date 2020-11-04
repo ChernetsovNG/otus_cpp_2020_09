@@ -1,7 +1,4 @@
 language: cpp
-matrix:
-  include:
-    - dist: xenial
 
 before_script:
   - sudo apt-get install libboost-test-dev -y
