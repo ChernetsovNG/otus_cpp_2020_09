@@ -9,7 +9,7 @@ struct MyVector {
         capacity = 1;
         length = 0;
         allocator = Alloc();
-        arr = std::allocator_traits<Alloc>::allocate(allocator, 1);
+        arr = allocate_memory();
     };
 
     ~MyVector() = default;
@@ -18,7 +18,7 @@ struct MyVector {
         if (length == capacity) {
             T *old = arr;
             capacity *= 2;
-            arr = std::allocator_traits<Alloc>::allocate(allocator, capacity);
+            arr = allocate_memory();
             std::copy(old, old + length, arr);
             std::allocator_traits<Alloc>::deallocate(allocator, old, length);
         }
@@ -80,4 +80,8 @@ private:
     long capacity;
     long length;
     Alloc allocator;
+
+    T *allocate_memory() {
+        return std::allocator_traits<Alloc>::allocate(allocator, capacity);
+    }
 };
