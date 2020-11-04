@@ -9,11 +9,12 @@ script:
   - cmake .. && cmake --build .
   - cmake --build . --target test
   - cmake --build . --target package
-  - cd ..
+  - cd ../..
   - echo "Build HW2"
   - cd ./HW2 && mkdir build && cd build
   - cmake .. && cmake --build .
-  - cd .. && cd ./HW1
+  - cd ../..
+  - cd ./HW1
 deploy:
   provider: script
   skip_cleanup: true
