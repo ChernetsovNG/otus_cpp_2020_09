@@ -14,7 +14,7 @@ script:
   - cd ./HW2 && mkdir build && cd build
   - cmake .. && cmake --build .
   - cd ../..
-  - cd ./HW1
+  - cd ./HW1/build
 deploy:
   provider: script
   skip_cleanup: true
