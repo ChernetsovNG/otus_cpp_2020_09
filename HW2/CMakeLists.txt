@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(HW2)
 
-add_executable(program program.cpp)
+add_executable(program program.cpp allocator.cpp vector.cpp)
 
 set_target_properties(program PROPERTIES
         CXX_STANDARD 17
