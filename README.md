@@ -12,3 +12,6 @@
 Реализация аллокатора
 
 Условие задания - по [ссылке](./homeworks/02_homework.pdf).
+
+acm.timus.ru (Timus Online Judge)
+Your JUDGE_ID: 304482YI
