@@ -1,6 +1,4 @@
 #include <iostream>
-#include <string>
-#include <sstream>
 
 int main() {
     int N, M;
