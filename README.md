@@ -6,3 +6,18 @@
 Настройка сборочного конвейера, фильтрация ip-адресов
 
 Условие задания - по [ссылке](./homeworks/01_homework.pdf).
+
+**Домашнее задание №2**
+
+Реализация аллокатора
+
+Условие задания - по [ссылке](./homeworks/02_homework.pdf).
+
+**Timus**
+
+acm.timus.ru (Timus Online Judge)
+Your JUDGE_ID: 304482YI
+
+Карта решённых задач:
+
+https://acm.timus.ru/author.aspx?id=304482

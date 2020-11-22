@@ -1,15 +1,25 @@
 language: cpp
+
+dist: focal
+
 before_script:
   - sudo apt-get install libboost-test-dev -y
-  - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update -qq
+  - echo "deb http://archive.ubuntu.com/ubuntu focal main universe" | sudo tee -a /etc/apt/sources.list
+  - sudo apt-get update -qq && sudo apt install g++-10
+
 script:
   - echo "Build HW1"
   - cd ./HW1 && mkdir build && cd build
-  - cmake ..
-  - cmake --build .
+  - cmake .. && cmake --build .
   - cmake --build . --target test
   - cmake --build . --target package
+  - cd ../..
+  - echo "Build HW2"
+  - cd ./HW2 && mkdir build && cd build
+  - cmake .. && cmake --build .
+  - cd ../..
+  - cd ./HW1/build
+
 deploy:
   provider: script
   skip_cleanup: true
