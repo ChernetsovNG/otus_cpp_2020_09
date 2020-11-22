@@ -103,7 +103,7 @@ void part4() {
 int main() {
     std::cout << "--- HW2 START ---" << std::endl;
 
-    // 1. std::map
+    // 1. std::map со стандартным аллокатором
     part1();
 
     // 2. std::map с custom аллокатором
