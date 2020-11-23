@@ -8,20 +8,33 @@ before_script:
   - sudo apt-get update -qq && sudo apt install g++-10
 
 script:
+  # сборка HW1
   - echo "Build HW1"
   - cd ./HW1 && mkdir build && cd build
   - cmake .. && cmake --build .
   - cmake --build . --target test
   - cmake --build . --target package
+  # сборка HW2
   - cd ../..
   - echo "Build HW2"
   - cd ./HW2 && mkdir build && cd build
   - cmake .. && cmake --build .
+  # сборка HW3
   - cd ../..
-  - cd ./HW1/build
+  - echo "Build HW3"
+  - cd ./HW3 && mkdir build && cd build
+  - cmake .. && cmake --build .
+  # поднимаемся в корневую директорию
+  - cd ../..
+  # собираем документацию doxygen
+  - doxygen doxygen.conf
 
 deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-    - curl -T helloworld-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -unchernetsov:$BINTRAY_API_KEY "https://api.bintray.com/content/nchernetsov/otus_cpp_2020_09/homeworks/$TRAVIS_BUILD_NUMBER/helloworld-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  - provider: script
+    skip_cleanup: true
+    script:
+      - curl -T ./HW1/build/helloworld-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -unchernetsov:$BINTRAY_API_KEY "https://api.bintray.com/content/nchernetsov/otus_cpp_2020_09/homeworks/$TRAVIS_BUILD_NUMBER/helloworld-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: true
