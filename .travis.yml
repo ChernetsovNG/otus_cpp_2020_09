@@ -5,7 +5,7 @@ dist: focal
 before_script:
   - sudo apt-get install libboost-test-dev -y
   - echo "deb http://archive.ubuntu.com/ubuntu focal main universe" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update -qq && sudo apt install g++-10
+  - sudo apt-get update -qq && sudo apt install g++-10 && sudo apt install doxygen
 
 script:
   # сборка HW1
