@@ -1,16 +1,16 @@
+#include <iostream>
 #include <cmath>
-#include <cstdio>
-
-#define SIZE (256 * 1024) / sizeof(double)
-double n[SIZE + 1];
+#include <vector>
 
 int main() {
-    int s = 0;
+    double n;
+    std::vector<double> v;
 
-    while (scanf("%lf", &(n[s])) != EOF) {
-        s++;
+    while (std::cin >> n) {
+        v.push_back(n);
     }
 
-    s -= 2;
-    for (; s >= 0; s--) printf("%.4f\n", sqrt(n[s]));
+    for (unsigned long long i = v.size() - 1; i >= 0; i--) {
+        printf("%.4f\n", sqrt(v[i]));
+    }
 }
