@@ -3,5 +3,6 @@
 int main() {
     int m, n;
     std::cin >> m >> n;
-    std::cout << m << std::endl;
+    int square = m * n;
+    std::cout << (square % 2 == 0 ? "[:=[first]" : "[second]=:]") << std::endl;
 }
